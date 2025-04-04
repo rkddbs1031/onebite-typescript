@@ -4,7 +4,8 @@
     "module": "ESNext",
     "outDir": "dist",
     "strict": false,
-    "moduleDetection": "force"
+    "moduleDetection": "force",
+    "skipLibCheck": true
   },
   "include": ["src"]
 }
