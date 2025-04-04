@@ -9,6 +9,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/node": "^22.13.17"
+    "@types/node": "^22.14.0"
   }
 }
