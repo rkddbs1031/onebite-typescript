@@ -2,9 +2,9 @@
 
 ## 1.강의 정리
 
-### chapter1 원시타입과 리터럴 타입
+### chapter1. 원시타입과 리터럴 타입
 
-<h3>원시타입 number</h3>
+<h4>원시타입 number</h4>
 
 ```
 // number
@@ -26,7 +26,7 @@ num1 = 'hello'; // ❌
 num1.toUpperCase(); // ❌
 ```
 
-<h3>원시타입 string</h3>
+<h4>원시타입 string</h4>
 
 ```
 // string
@@ -39,7 +39,7 @@ let str4: string = `hello ${str1}`;
 <p>string 타입은 문자열을 의미하는 타입</p>
 <br>
 
-<h3>원시타입 boolean</h3>
+<h4>원시타입 boolean</h4>
 
 ```
 // boolean
@@ -50,7 +50,7 @@ let bool2 : boolean = false;
 <p>boolean 타입은 참과 거짓만을 저장하는 타입입니다.</p>
 <br>
 
-<h3>원시타입 null</h3>
+<h4>원시타입 null</h4>
 
 ```
 // null
@@ -61,7 +61,7 @@ let null1: numm = null
 
 <br>
 
-<h3>원시타입 undefined</h3>
+<h4>원시타입 undefined</h4>
 
 ```
 // undefined 타입
@@ -71,7 +71,7 @@ let unde1: undefined = undefined;
 <p>undefined 타입 역시 오직 undefined 값만 포함하는 타입입니다.</p>
 <br>
 
-<h3>리터얼 타입</h3>
+<h4>리터얼 타입</h4>
 
 ```
 let numA: 10 = 10;
@@ -87,9 +87,9 @@ let boolA: true = true;
 let boolB: false = false;
 ```
 
-### chapter2 배열
+### chapter2. 배열과 튜플
 
-<h3>배열 타입 정의 방법</h3>
+<h4>배열 타입 정의 방법</h4>
 
 ```
 let numArr: number[] = [1, 2, 3];
@@ -100,7 +100,7 @@ let boolArr: Array<boolean> = [true, false, true];
 
 <br>
 
-<h3>다양한 타입 요소를 갖는 배열 타입 정의하기</h3>
+<h4>다양한 타입 요소를 갖는 배열 타입 정의하기</h4>
 
 ```
 let multiArr: (number | string)[] = [1, "hello"];
@@ -109,7 +109,7 @@ let multiArr: (number | string)[] = [1, "hello"];
 <p> ``|`` 를 사용한 즉 유니온(Union) 타입이라 부른다.</p>
 <br>
 
-<h3>다차원 배열 타입 정의하기</h3>
+<h4>다차원 배열 타입 정의하기</h4>
 
 ```
 let doubleArr : number[][] = [
@@ -118,7 +118,7 @@ let doubleArr : number[][] = [
 ];
 ```
 
-### 튜플
+<h4>튜플</h4>
 
 <p>
 앞서 배열 타입을 정의하는 방법을 살펴보며 배열의 타입을 고!정! 하는 방법은 살펴보았지만 배열의 길이까지 고정하는 방법 또한 있다. 
@@ -164,6 +164,8 @@ const users: [string, number][] = [
 
 <p>투플을 이용하여 위와 같은 오류를 바로 잡을 수 있습니다!</p>
 
+
+<br><br><br><br><br>
 ## 2. 트러블 슈팅
 
 1. 컴파일 실행하기 위해 tsc 명령어 입력시 아래와 같은 오류가 발생
