@@ -140,7 +140,7 @@ let tup2: [number, string, boolean] = [1, '이강윤', true];
 
 ```
 const users = [
-  ["이정환", 1],
+  ["이강윤", 1],
   ["이아무개", 2],
   ["김아무개", 3],
   ["박아무개", 4],
@@ -154,7 +154,7 @@ const users = [
 
 ```
 const users: [string, number][] = [
-  ["이정환", 1],
+  ["이강윤", 1],
   ["이아무개", 2],
   ["김아무개", 3],
   ["박아무개", 4],
@@ -163,9 +163,91 @@ const users: [string, number][] = [
 ```
 
 <p>투플을 이용하여 위와 같은 오류를 바로 잡을 수 있습니다!</p>
+<br>
 
+### chapter3. 객체
+
+<h3>객체 타입을 정의하는 방법</h3>
+
+<h4>1. object로 정의하기</h4>
+
+```
+let user: object = {
+  id: 1,
+  name: "이강윤",
+};
+
+user.id; // ❌ 오류 발생 => object 타입에 id 프로퍼티가 없다고 나타남
+
+```
+
+<p>user에 저장된 객체의 구조를 그대로 타입으로 만들고 싶다면 object가 아닌 객체 리터럴 타입을 이용해야함.</p>
+
+<br>
+
+<h4>2. 객체 리터럴 타입</h4>
+
+```
+let user: {
+  id: number;
+  name: string;
+} = {
+  id: 1,
+  name: "이강윤",
+};
+
+user.id;
+```
+
+<p>프로퍼티에 이상 없이 접근할 수 있게 됨</p>
+
+<br>
+
+<h3>특수한 프로퍼티 정의하기</h3>
+
+<h4>선택적 프로퍼티(Optional Property)</h4>
+
+```
+let user: {
+  id?: number; // 선택적 프로퍼티가 된 id
+  name: string;
+} = {
+  id: 1,
+  name: "이강윤",
+};
+
+user = {
+  name: "홍길동",
+};
+```
+
+<p>
+프로퍼티 뒤에 ``?`` 를 붙어져무녀 선택적 프로퍼티로 설정 가능<br>
+따라서 user = { name: '홍길돌' }에 id 값이 없어도 오류가 발생하지 않음
+</p>
+
+<br>
+
+<h4>읽기전용 프로퍼티 (Readonly Property)</h4>
+
+```
+let user: {
+  id?: number;
+  readonly name: string; // name은 이제 Readonly 프로퍼티가 되었음
+} = {
+  id: 1,
+  name: "이강윤",
+};
+
+user.name = "dskfd"; // 오류 발생
+```
+
+<p>name 프로퍼티는 readonly로 인해 읽기 전용 프로퍼티가 되었기 때문에 수정하려고 하면 오류 발생! <br>
+의도치 않은 프로퍼티의 수정을 방지할 수 있음!
+</p>
 
 <br><br><br><br><br>
+
 ## 2. 트러블 슈팅
 
 1. 컴파일 실행하기 위해 tsc 명령어 입력시 아래와 같은 오류가 발생
