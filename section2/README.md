@@ -495,6 +495,51 @@ var Language;
 
 <p>enum은 컴파일될 때 다른 타입들 처럼 사라지지 않고 자바스크립트 객체로 변환된다!!!</p>
 
+### chapter6. any와 unknown
+
+<h4>any 타입</h4>
+
+```
+let anyVar = 10; // 자동 추론하여 number 타입을 가짐
+anyVar = "hello"; //오류 발생!
+```
+
+<p>이럴 때 any라는 치트키 타입 이용하면 됨</p>
+
+```
+let anyVar: any = 10;
+anyVar = "hello";
+
+anyVar = true;
+anyVar = {};
+
+anyVar.toUpperCase();
+anyVar.toFixed();
+anyVar.a;
+
+let num: number = 10;
+num = anyVar;
+```
+
+<p>하지만 컴파일하게 되면 런타임 오류가 발생합니다. </br>
+이렇듯 any타입은 타입 검사를 받지 않는 타입으로 모든 타입스크립트의 문법과 규칙으로부터 자유롭지만 그만큼 위험한 타입! </br>
+따라서 지양해야한다.</p>
+
+<h4>unknown 타입</h4>
+
+```
+let unknownVar: unknown;
+
+unknownVar = "";
+unknownVar = 1;
+unknownVar = () => {};
+
+num = unknownVar; // 오류 ! // any는 오류는 안남!
+```
+
+<p>unkown타입은 any 타입과 비슷해보이지만 보다 안전한 타입.</br>
+any 와 unknown은 모든 타입의 변수를 할당받을 수 있지만, any타입은 반대로도 모두 ok, unknown은 반대로 no!</p>
+
 <br><br><br><br><br>
 
 ## 2. 트러블 슈팅
