@@ -364,6 +364,137 @@ type CountryCodes = {
 
 <p>또한 추가적인 프로퍼티를 위와 같이 정의할 때는 인덱스 시그니쳐의 value 타입과 직접 추가한 value 타입이 ``호환``되거나 ``일치``해야되므로 이 점도 주의해아한다!</p>
 
+### chapter5. enum(열거형)타입
+
+<h4>열거형(Enum) 타입</h4>
+
+```
+const user1 = {
+  name: "강",
+  role: 0, // 0 <- 관리자
+};
+
+const user2 = {
+  name: "윤",
+  role: 1, // 1 <- 일반 유저
+};
+
+const user3 = {
+  name: "이",
+  role: 2, // 2 <- 게스트
+};
+```
+
+<p>위와 같이 숫자로 지정해두다가 나중에 '어? 관리자가 0번이었나,, 1번이었나..?'라고 헷갈릴 수 있음!! </br>
+따라서 효율적으로 실수를 막을 수 있는데 enum을 활용하면된다!</p>
+
+```
+// enum 타입
+// 여러가지 값들에 각각 이름을 부여해 열거해두고 사용하는 타입
+
+enum Role {
+  ADMIN = 0,
+  USER = 1,
+  GUEST =2,
+}
+
+const user1 = {
+  name: "강",
+  role: Role.ADMIN, // 0 <- 관리자
+};
+
+const user2 = {
+  name: "윤",
+  role: Role.USER, // 1 <- 일반 유저
+};
+
+const user3 = {
+  name: "이",
+  role: Role.GUEST, // 2 <- 게스트
+};
+
+```
+
+<p>위와 같이 enum작성후 확인해보면 Role.ADMIN부터 값인 0이 할당되는 것을 확인할 수 있다.</p>
+
+```
+enum Role {
+  ADMIN, // 0 할당(자동)
+  USER,  // 1 할당(자동)
+  GUEST, // 2 할당(자동)
+}
+
+const user1 = {
+  name: "강",
+  role: Role.ADMIN, // 0
+};
+
+const user2 = {
+  name: "윤",
+  role: Role.USER, // 1
+};
+
+const user3 = {
+  name: "이",
+  role: Role.GUEST, // 2
+};
+```
+
+<p>또한 enum타입은 숫자를 직접 할당하지 않아도 0부터 1씩 늘어나는 값으로 ``자동`` 할당된다.</p>
+
+```
+enum Role {
+  ADMIN = 10, // 10 할당
+  USER,       // 11 할당(자동)
+  GUEST,      // 12 할당(자동)
+}
+
+enum Role {
+  ADMIN, // 0 할당 (자동)
+  USER = 10,       // 10 할당
+  GUEST,      // 11 할당(자동)
+}
+```
+
+<p>더불어 특정 값부터 숫자를 할당하면 그 다음 값 또한 1씩 증가하며 할당된다</p>
+``숫자형 enum``이라고 부른다.
+
+<h4>문자열 열거형</h4>
+
+```
+enum Language {
+  korean = "ko",
+  english = "en",
+}
+
+
+const user1 = {
+  name: "강",
+  role: Role.ADMIN, //0
+  language: Language.korean // 'ko'
+};
+```
+
+<h4>enum은 컴파일 결과 객체가 된다</h4>
+
+```
+// 컴파일
+var Role;
+(function (Role) {
+    Role[Role["ADMIN"] = 0] = "ADMIN";
+    Role[Role["USER"] = 1] = "USER";
+    Role[Role["GUEST"] = 2] = "GUEST";
+})(Role || (Role = {}));
+var Language;
+(function (Language) {
+    Language["korean"] = "ko";
+    Language["english"] = "en";
+    Language["japanese"] = "jp";
+})(Language || (Language = {}));
+```
+
+<p>enum은 컴파일될 때 다른 타입들 처럼 사라지지 않고 자바스크립트 객체로 변환된다!!!</p>
+
 <br><br><br><br><br>
 
 ## 2. 트러블 슈팅
@@ -384,14 +515,17 @@ TS 컴파일러 설정이 Node.js환경과 호환되지 않을 경우 오류 발
  라이브러리의 타입 검사 생략 <br>
 
 ```
+
 {
-    "compilerOptions": {
-        "skipLibCheck": true,
-        // 다른 설정들
-    }
+"compilerOptions": {
+"skipLibCheck": true,
+// 다른 설정들
 }
+}
+
 ```
 
 tsconfig.json에서 skipLibCheck 옵션을 true로 설정하여 모든 타입 검사를 생략할 수 있습니다.
 
 </p>
+```
