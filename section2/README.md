@@ -246,6 +246,124 @@ user.name = "dskfd"; // 오류 발생
 의도치 않은 프로퍼티의 수정을 방지할 수 있음!
 </p>
 
+<br>
+
+### chapter4. 타입 별칭과 인덱스 시그니처
+
+<h4>타입 별칭(Type Alias)</h4>
+
+```
+// 타입 별칭
+
+type User = {
+  id: number;
+  name: string;
+  nickname: string;
+  birth: string;
+  bio: string;
+  location: string;
+};
+
+function func() {
+  type User = {};
+}
+
+let user: User = {
+  id: 1,
+  name: "강윤",
+  nickname: "yoon",
+  birth: "1998.10.31",
+  bio: "안녕하세요",
+  location: "수원",
+};
+
+let user2: User = {
+  id: 2,
+  name: "윤윤",
+  nickname: "yoonyoon",
+  birth: "1998.10.31",
+  bio: "안녕하세요",
+  location: "수원",
+};
+```
+
+<p>type 타입_이름 = 타입 형태로 타입을 정의합니다 </br>
+동일한 스코프에 동일한 이름의 타입 별칭 선언은 불가합니다. </br>
+타입 별칭으로 중복된 타입 코드를 선언을 제거할 수 있습니다. </br>
+타입 관련 문접은 컴파일과 함께 모두 사라지는 것 확인 가능합니다. (tsc)
+</p>
+
+<h4>인덱스 시그니처(Index Signature)</h4>
+
+```
+type CountryCodes = {
+  Korea: string;
+  UnitedState: string;
+  UnitedKingdom: string;
+  ... ( 약 100개의 국가 )
+};
+
+let countryCodes: CountryCodes = {
+  Korea: "ko",
+  UnitedState: "us",
+  UnitedKingdom: "uk",
+  // (... 약 100개의 국가)
+  ...
+};
+```
+
+<p> 다양한 국가들의 영어 코드를 저장하는 객체가 있다고 가정 </br>
+만약 100개 이상의 프로퍼티가 추가된다면 타입 정의에도 모두 정의를 해줘야하기 때문에 매우 불편!! </br>
+이럴 때 ``인덱스 시그니쳐``를 이용하면 됨.
+</p>
+
+```
+type CountryCodes = {
+  [key: string]: string;
+};
+
+let countryCodes: CountryCodes = {
+  Korea: "ko",
+  UnitedState: "us",
+  UnitedKingdom: "uk",
+  // (... 약 100개의 국가)
+  Brazil : 'bz'
+};
+```
+
+<p>key 와 value의 규칙을 기준으로 객체 타입을 정의할 수 있는 것이 인덱스 시그니처!</p>
+
+</br></br>
+
+<p></p>
+
+```
+type CountryCodes = {
+  [key: string]: string;
+  Korea: number; // !!!
+};
+```
+
+<p>민약 반드시 포함해야하는  프로퍼티가 있다면 위와 같이 작성하면 된다!</p>
+
+```
+let countryCodes: CountryCodes = {}
+```
+
+<p>주의해야할 점으로는 위와 같이 빈 값이어도 오류가 나타나지 않는다!</br>
+그 이유는 인덱스 프로퍼티는 규칙을 위반하지 않는다면 모든 객체를 허용하는 타입이므로 위반할 프로퍼티 자체가 없으므로 문제가 되지 않는다!</br>
+따라서 이 점은 주의해야할 것!
+</p>
+
+```
+type CountryCodes = {
+  [key: string]: string;
+  Korea: string; // 오류!
+};
+```
+
+<p>또한 추가적인 프로퍼티를 위와 같이 정의할 때는 인덱스 시그니쳐의 value 타입과 직접 추가한 value 타입이 ``호환``되거나 ``일치``해야되므로 이 점도 주의해아한다!</p>
+
 <br><br><br><br><br>
 
 ## 2. 트러블 슈팅
