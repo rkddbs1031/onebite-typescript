@@ -540,6 +540,39 @@ num = unknownVar; // 오류 ! // any는 오류는 안남!
 <p>unkown타입은 any 타입과 비슷해보이지만 보다 안전한 타입.</br>
 any 와 unknown은 모든 타입의 변수를 할당받을 수 있지만, any타입은 반대로도 모두 ok, unknown은 반대로 no!</p>
 
+### chapter7. void와 never
+
+<h4>void 타입</h4>
+
+```
+function func2(): void {
+  console.log("hello");
+}
+
+let a: void;
+a = undefined;
+a = null;
+```
+
+<p>아무런 값도 반환하지 않는 함수의 반환값 타입을 정의할 때 사용한다.</p>
+
+<h4>never 타입</h4>
+
+```
+function func3(): never {
+  while (true) {}
+}
+let anyVar: any;
+
+let a: nver;
+a = 1; // ❌
+a = undefined; // ❌
+a = null; // ❌
+a = anyVar; // ❌
+```
+
+<p>func3는 무한루프를 돌기 때문에 아무런 값을 환산할 수 없다. 즉 불가능!</br>
+이럴때 never 타입을 정의할 수 있음.</p>
 <br><br><br><br><br>
 
 ## 2. 트러블 슈팅
